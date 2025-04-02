@@ -1,0 +1,74 @@
+<h1 class="mb-4 text-center text-primary">Add New Book</h1>
+
+<div class="card shadow-lg p-4">
+  <div class="card-body">
+    <%= form_with(model: @book, local: true, html: { class: "needs-validation" }) do |form| %>
+      
+      <div class="mb-3">
+        <%= form.label :book_title, class: "form-label fw-bold" %>
+        <%= form.text_field :book_title, class: "form-control", placeholder: "Enter book title", required: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :authors, "Select Author(s)", class: "form-label fw-bold" %>
+        
+        <!-- Authors Dropdown with a custom class -->
+        <div class="dropdown authors-dropdown">
+          <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Authors
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <% Author.all.each do |author| %>
+              <li>
+                <div class="form-check" style="padding: 8px 16px; display: flex; align-items: center;">
+                  <%= check_box_tag "book[author_ids][]", author.id, @book.author_ids.include?(author.id), class: "form-check-input ms-3" %>
+                  <%= label_tag "book_author_ids_#{author.id}", author.full_name, class: "form-check-label" %>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-4">
+        <%= form.submit "Create Book", class: "btn btn-success btn-lg shadow-sm" %>
+        <a href="<%= books_path %>" class="btn btn-secondary btn-lg shadow-sm">Cancel</a>
+      </div>
+
+    <% end %>
+  </div>
+</div>
+
+<!-- Inline CSS to Style Dropdown with Checkboxes -->
+<style>
+  /* Targeting only the authors-dropdown */
+  .authors-dropdown .dropdown-menu {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    max-height: 200px; /* Scrollable dropdown */
+    overflow-y: auto;
+    margin-left: -10px; /* Adjust dropdown to move slightly forward */
+    box-sizing: border-box; /* Ensures padding is included in width calculation */
+    padding: 0; /* Ensure padding doesn't affect width */
+  }
+
+  .authors-dropdown .form-check-input {
+    margin-left: 15px; /* Add space before the checkbox (you can adjust this value) */
+    margin-right: 10px; /* Adjust spacing between checkbox and label */
+  }
+
+  .authors-dropdown .form-check-label {
+    font-weight: normal; /* Optional: reset label font weight */
+    white-space: nowrap;
+  }
+
+  .authors-dropdown .form-check-input:checked + .form-check-label {
+    font-weight: bold; /* Make label bold when checkbox is checked */
+  }
+
+  .dropdown-toggle::after {
+    display: none; /* Hides the default arrow */
+  }
+</style>

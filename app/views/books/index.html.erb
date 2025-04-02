@@ -1,0 +1,53 @@
+<h1 class="mb-4 text-center text-primary">Books</h1>
+
+<div class="row">
+  <% @books.each do |book| %>
+    <div class="col-md-4 mb-4">
+      <div class="card custom-card" style="background-color:rgb(55, 67, 82); border: none; box-shadow: none;">
+        <div class="card-body text-center" style="color: white;"> <!-- Text color set to white -->
+          <h5 class="card-title">
+            <i class="bi bi-book-fill" style="color: white; margin-right: 8px;"></i> <%= book.book_title %> <!-- Icon color set to white -->
+          </h5>
+          <p class="card-text" style="color: white;">ID: <%= book.id %></p> <!-- ID text color set to white -->
+          <div class="d-flex justify-content-center gap-2">
+            <a href="<%= book_path(book) %>" class="btn btn-info btn-sm shadow-sm">
+              <i class="bi bi-eye"></i> Show
+            </a>
+            <a href="<%= edit_book_path(book) %>" class="btn btn-warning btn-sm shadow-sm">
+              <i class="bi bi-pencil-square"></i> Edit
+            </a>
+            <%= button_to "Delete", book_path(book), method: :delete, class: "btn btn-danger btn-sm shadow-sm",
+                  data: { confirm: "Are you sure?" } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<style>
+  /* Custom Card Styles */
+  .custom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;  /* Rounded corners */
+  }
+
+  /* Card Hover Effect */
+  .custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Button Hover Effects */
+  .btn-info:hover {
+    background-color: #17a2b8;
+  }
+
+  .btn-warning:hover {
+    background-color: #e0a800;
+  }
+
+  .btn-danger:hover {
+    background-color: #dc3545;
+  }
+</style>
