@@ -1,0 +1,56 @@
+<h1 class="mb-4">Add New Author</h1>
+
+<%= form_with(model: @author, local: true, html: { class: "needs-validation" }) do |form| %>
+  <div class="card">
+    <div class="card-body">
+      <!-- Author Fields -->
+      <div class="mb-3">
+        <%= form.label :first_name, class: "form-label" %>
+        <%= form.text_field :first_name, class: "form-control", placeholder: "Enter first name", required: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :last_name, class: "form-label" %>
+        <%= form.text_field :last_name, class: "form-control", placeholder: "Enter last name", required: true %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :date_of_birth, class: "form-label" %>
+        <%= form.date_select :date_of_birth, start_year: 1900, end_year: Time.now.year, class: "form-control", required: true %>
+      </div>
+
+      <!-- Reference Author Dropdown -->
+      <div class="mb-3">
+        <%= form.label :reference_author_id, "Reference Author (Optional)", class: "form-label" %>
+         </div>
+
+      <!-- Select Existing Authors -->
+      <div class="mb-3">
+        <%= form.label :existing_author_ids, "Select Existing Authors", class: "form-label" %>
+        <%= form.collection_check_boxes :existing_author_ids, Author.all, :id, :full_name do |b| %>
+          <div class="form-check">
+            <%= b.check_box(class: "form-check-input") %>
+            <%= b.label(class: "form-check-label") do %>
+              <%= b.object.full_name %>  <!-- Display the full name of the author -->
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Add New Book Fields -->
+      <div class="mb-3">
+        <%= form.fields_for :books do |book_form| %>
+          <div class="mb-3">
+            <%= book_form.label :book_title, class: "form-label" %>
+            <%= book_form.text_field :book_title, class: "form-control", placeholder: "Enter book title" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <%= form.submit "Create Author", class: "btn btn-primary" %>
+        <%= link_to 'Cancel', authors_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+<% end %>
