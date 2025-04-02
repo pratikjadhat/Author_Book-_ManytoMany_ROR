@@ -1,4 +1,5 @@
 class Api::V1::AuthorsController < ApplicationController
+<<<<<<< HEAD
   # Create an author
   def create
     author = Author.new(author_params)
@@ -45,6 +46,21 @@ class Api::V1::AuthorsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     render json: { error: 'Author not found' }, status: :not_found
   end
+=======
+
+  def show
+    author = Author.find(params[:id])
+    render json: author, include: { books: { only: [:id, :book_title] } }, status: :ok
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'Author not found' }, status: :not_found
+  end
+  
+  def index
+    authors = Author.all
+    render json: authors, include: { books: { only: [:id, :book_title] } }, status: :ok
+  end
+  
+>>>>>>> 3b110f1 (Modified Book create - added dropdown to existing user)
 
   private
 

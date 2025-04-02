@@ -11,10 +11,16 @@
   <!-- Bootstrap Icons -->
   <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" %>
 
+<<<<<<< HEAD
+=======
+  <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js", integrity: "sha384-pzjw8f+ua7Kw1TIq0d3PvVAxEzX0pXh2p6t92Rt9D2dF4Ogn7cDA2ty3T4FV9K5j", crossorigin: "anonymous" %>
+
+>>>>>>> 3b110f1 (Modified Book create - added dropdown to existing user)
   <!-- Custom CSS for Flash Message -->
   <style>
     .flash-message {
       position: fixed;
+<<<<<<< HEAD
       top: 60px;  /* Position below the navbar */
       left: 50%;
       transform: translateX(-50%);
@@ -23,11 +29,20 @@
       padding: 10px 20px;
       background-color: #f8d7da; /* Red for errors, adjust for other types */
       color: #721c24;
+=======
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1050;
+      display: none;
+      padding: 10px 20px;
+>>>>>>> 3b110f1 (Modified Book create - added dropdown to existing user)
       border-radius: 5px;
       font-weight: bold;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: opacity 0.5s ease-out;
     }
+<<<<<<< HEAD
 
     .flash-message.success {
       background-color: #d4edda;
@@ -43,12 +58,19 @@
       background-color: #fff3cd;
       color: #856404;
     }
+=======
+    .flash-message.success { background-color: #d4edda; color: #155724; }
+    .flash-message.info { background-color: #d1ecf1; color: #0c5460; }
+    .flash-message.warning { background-color: #fff3cd; color: #856404; }
+    .flash-message.error { background-color: #f8d7da; color: #721c24; }
+>>>>>>> 3b110f1 (Modified Book create - added dropdown to existing user)
   </style>
 </head>
 <body>
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
+<<<<<<< HEAD
       <!-- LibraryApp Logo & Name -->
       <div class="d-flex align-items-center">
         <%= link_to about_path, class: 'navbar-brand d-flex align-items-center fs-3 fw-bold text-light me-4' do %>
@@ -70,17 +92,46 @@
               Authors
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownAuthors">
+=======
+      <!-- LibraryApp Logo -->
+      <a href="<%= about_path %>" class="navbar-brand fs-3 fw-bold text-light">
+        <i class="bi bi-book-fill me-2" style="font-size: 1.8rem;"></i> LibraryApp
+      </a>
+
+      <!-- Navbar Toggle for Mobile -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-3">
+          <!-- Authors Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fs-5 fw-bold" href="#" id="navbarDropdownAuthors" data-bs-toggle="dropdown">
+              Authors
+            </a>
+            <ul class="dropdown-menu">
+>>>>>>> 3b110f1 (Modified Book create - added dropdown to existing user)
               <li><%= link_to 'Show All Authors', authors_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Create Author', new_author_path, class: 'dropdown-item' %></li>
             </ul>
           </li>
 
+<<<<<<< HEAD
           <!-- Dropdown for Books -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle fs-5 fw-bold" href="#" id="navbarDropdownBooks" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Books
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownBooks">
+=======
+          <!-- Books Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fs-5 fw-bold" href="#" id="navbarDropdownBooks" data-bs-toggle="dropdown">
+              Books
+            </a>
+            <ul class="dropdown-menu">
+>>>>>>> 3b110f1 (Modified Book create - added dropdown to existing user)
               <li><%= link_to 'Show All Books', books_path, class: 'dropdown-item' %></li>
               <li><%= link_to 'Create Book', new_book_path, class: 'dropdown-item' %></li>
             </ul>
@@ -90,13 +141,18 @@
     </div>
   </nav>
 
+<<<<<<< HEAD
   <!-- Flash Message Container -->
+=======
+  <!-- Flash Messages -->
+>>>>>>> 3b110f1 (Modified Book create - added dropdown to existing user)
   <div id="flash-message" class="flash-message"></div>
 
   <div class="container mt-4">
     <%= yield %>
   </div>
 
+<<<<<<< HEAD
   <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" %>
 
   <!-- JavaScript to Handle Flash Message -->
@@ -121,6 +177,27 @@
           flashMessage.style.opacity = 0;
           setTimeout(() => flashMessage.style.display = 'none', 500);
         }, 2000); // Hide after 2 seconds
+=======
+  <!-- Bootstrap JavaScript -->
+  <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" %>
+
+  <!-- Flash Message JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const flashMessage = document.getElementById('flash-message');
+      <% if flash[:notice] || flash[:alert] || flash[:error] %>
+        let message = "<%= flash[:notice] || flash[:alert] || flash[:error] %>";
+        let type = "<%= flash[:notice] ? 'success' : (flash[:alert] ? 'warning' : 'error') %>";
+
+        flashMessage.textContent = message;
+        flashMessage.classList.add(type);
+        flashMessage.style.display = 'block';
+
+        setTimeout(() => {
+          flashMessage.style.opacity = 0;
+          setTimeout(() => flashMessage.style.display = 'none', 500);
+        }, 3000);
+>>>>>>> 3b110f1 (Modified Book create - added dropdown to existing user)
       <% end %>
     });
   </script>
